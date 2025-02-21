@@ -1,0 +1,9 @@
+{
+	"name": "sravanicloudtrainingadf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "4f6de76f-474a-4de6-93b0-342b25b57a04",
+		"tenantId": "e714ef31-faab-41d2-9f1e-e6df4af16ab8"
+	}
+}

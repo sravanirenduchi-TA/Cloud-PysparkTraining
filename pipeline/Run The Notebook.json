@@ -1,0 +1,59 @@
+{
+	"name": "Run The Notebook",
+	"properties": {
+		"activities": [
+			{
+				"name": "Taxi Fare Prediction",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Workspace/Users/sravani.renduchi@tigeranalytics.com/Taxi Fare Prediction"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Get the Message",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Taxi Fare Prediction",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "status",
+					"value": {
+						"value": "@activity('Taxi Fare Prediction').output['runOutput']['message']",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"status": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-02-21T12:32:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
